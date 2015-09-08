@@ -1,3 +1,8 @@
+li(ng-show='!user.id')
+  a(ng-href='/#/sign_in') Sign in
+li(ng-show='user.id')
+  a(ng-click='signOut()') Sign out
+
 div.container
   div(ng-include="'components/navbar/navbar.html'")
   h1 Posts

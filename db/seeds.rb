@@ -12,3 +12,4 @@ Post.create([
      { title: 'Third post', content: 'Test 3' },
      { title: 'Fourth post', content: 'Test 4' },
  ])
+

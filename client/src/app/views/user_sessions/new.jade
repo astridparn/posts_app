@@ -1,0 +1,11 @@
+.alert.alert-danger(role='alert', ng-show='error')
+  | {{error}}
+
+form(ng-submit='submitLogin(loginForm)', role='form', ng-init='loginForm = {}')
+  .form-group
+    label(for='email') Email
+    input#email.form-control(type='email', name='email', ng-model='loginForm.email', required='required')
+  .form-group
+    label(for='password') Password
+    input#password.form-control(type='password', name='password', ng-model='loginForm.password', required='required')
+  button.btn.btn-primary.btn-lg(type='submit') Sign in
