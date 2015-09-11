@@ -17,11 +17,14 @@ ActiveRecord::Schema.define(version: 20150907171847) do
   enable_extension "plpgsql"
 
   create_table "posts", force: :cascade do |t|
+    t.integer  "user_id",    null: false
     t.string   "title",      null: false
-    t.string   "content"
+    t.string   "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false

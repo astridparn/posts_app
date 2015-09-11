@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
+  before_filter :require_authorization, only: [:destroy]
   before_action :set_post, only: [:show, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
-
     render json: @posts
   end
 
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -54,6 +55,10 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :user_id)
+    end
+
+    def require_authorization
+      redirect_to :root unless is_admin or current_user.posts.find_by_post_id(params[:id])
     end
 end
