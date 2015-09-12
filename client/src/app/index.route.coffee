@@ -13,11 +13,11 @@ angular.module "postsAppb"
         controller: "UserSessionsController"
         controllerAs: "sign_in"
 
-    .state "sign_up",
-      url: "/sign_up"
-      templateUrl: "app/views/user_registrations/new.html"
-      controller: "UserRegistrationsController"
-      controllerAs: "sign_up"
+      .state "sign_up",
+        url: "/sign_up"
+        templateUrl: "app/views/user_registrations/new.html"
+        controller: "UserRegistrationsController"
+        controllerAs: "sign_up"
 
     $urlRouterProvider.otherwise '/'
 

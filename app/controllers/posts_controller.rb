@@ -59,6 +59,6 @@ class PostsController < ApplicationController
     end
 
     def require_authorization
-      redirect_to :root unless is_admin or current_user.posts.find_by_post_id(params[:id])
+      #redirect_to :root unless is_admin or current_user.posts.find_by_post_id(params[:id])
     end
 end

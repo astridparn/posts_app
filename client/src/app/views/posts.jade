@@ -11,14 +11,27 @@ li(ng-show='!user.id')
 div.container
   h1 Posts
 
-  ul(ng-repeat="post in posts")
-    li {{ post.title }} : {{ post.content }}
+  .panel.panel-default
+  .panel-heading New post
+  .panel-body
+    form(ng-submit='addPost()', role='form', ng-init='createPostForm = {}')
+      .form-group
+        label(for='title') Title
+        input#title.form-control(type='text', name='title', ng-model='createPostForm.title', required='required')
+      .form-group
+        label(for='content') Message
+        textarea#content.form-control(name='content', ng-model='createPostForm.content', required='required')
+      button.btn.btn-primary(type='submit') Post
 
-  form(ng-submit='addPost()', role='form', ng-init='createPostForm = {}')
-    .form-group
-      label(for='title') Title
-      input#title.form-control(type='text', name='title', ng-model='createPostForm.title', required='required')
-    .form-group
-      label(for='content') Message
-      textarea#content.form-control(name='content', ng-model='createPostForm.content', required='required')
-    button.btn.btn-default(type='submit') Post
+  // existing items
+  .panel.panel-default(ng-repeat="post in posts | orderBy: '-createdAt'")
+    .panel-heading
+      | {{ post.title }}
+    .panel-body
+      | {{post.content}}
+    .panel-footer
+      .row
+        .col-md-6 {{ post.user.email }} - {{ post.createdAt|date:'MM/dd/yyyy @ h:mma' }}
+        .col-md-6.text-right.glyphicon.glyphicon-trash(ng-click='deletePost( post )')
+
+
