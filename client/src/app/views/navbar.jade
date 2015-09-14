@@ -15,5 +15,5 @@ nav.navbar.navbar-default(role='navigation')
         li(ng-hide='user.id')
           a(href='#/sign_up') Register
         li(ng-show='user.id')
-          a(href='#', ng-click='signOut()') Sign out
+          a(href='#', ng-click='signOut()') Sign out&nbsp;
             strong  {{ user.email }}
