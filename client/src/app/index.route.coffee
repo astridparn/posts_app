@@ -25,13 +25,31 @@ angular.module "postsAppb"
     class Post extends RailsResource
       @configure url: "/api/posts", name: "post"
 
+  .factory 'Roles', ($auth) ->
+    adminRoles = [
+      'admin'
+    ]
+    userRoles = [
+      'registered'
+      'admin'
+    ]
+    userRoleIn = (roles) ->
+      $auth.validateUser().then((user) ->
+        roles.indexOf(user.role.name) > -1
+      ).catch ->
+        false
+
+    isAdmin: ->
+      userRoleIn adminRoles
+    isUser: ->
+      userRoleIn userRoles
+
   .run [
     '$rootScope'
     '$location'
     ($rootScope, $location) ->
       $rootScope.$on 'auth:login-success', ->
         $location.path '/posts'
-        console.log 'Welcome'
       $rootScope.$on 'auth:logout-success', ->
-        console.log 'goodbye'
+        $location.path '/sign_in'
   ]

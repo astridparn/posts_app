@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_filter :require_authorization, only: [:destroy]
   before_action :set_post, only: [:show, :update, :destroy]
+  after_action :verify_authorized, except: [:show, :index]
 
   # GET /posts
   # GET /posts.json
@@ -18,7 +18,10 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    logger.debug "Create action authorize #{current_user}"
     @post = Post.new(post_params)
+    authorize @post
+    logger.debug "Create action authorized"
     @post.user_id = current_user.id
 
     if @post.save
@@ -32,6 +35,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
+    authorize @post
 
     if @post.update(post_params)
       head :no_content
@@ -43,6 +47,8 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    authorize @post
+
     @post.destroy
 
     head :no_content
@@ -58,7 +64,4 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :content, :user_id)
     end
 
-    def require_authorization
-      #redirect_to :root unless is_admin or current_user.posts.find_by_post_id(params[:id])
-    end
 end

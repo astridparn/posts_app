@@ -2,7 +2,7 @@
   | {{error}}
 
 div.container
-  .panel
+  .panel(ng-show='isUser')
     .panel-body
       form(ng-submit='addPost()', role='form', ng-init='createPostForm = {}')
         .form-group
@@ -22,6 +22,6 @@ div.container
     .panel-footer
       .row
         .col-md-6 {{ post.user.email }} - {{ post.createdAt|date:'MM/dd/yyyy @ h:mma' }}
-        .col-md-6.text-right.glyphicon.glyphicon-trash(ng-click='deletePost( post )')
+        .col-md-6.text-right.glyphicon.glyphicon-trash(ng-show='isAdmin || post.userId == user.id' ng-click='deletePost( post )')
 
 
