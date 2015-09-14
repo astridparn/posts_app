@@ -1,27 +1,27 @@
 .alert.alert-danger(role='alert', ng-show='error')
   | {{error}}
 
-div.container
-  .panel(ng-show='isUser')
-    .panel-body
-      form(ng-submit='addPost()', role='form', ng-init='createPostForm = {}')
-        .form-group
-          label(for='title') Title
-          input#title.form-control(type='text', name='title', ng-model='createPostForm.title', required='required')
-        .form-group
-          label(for='content') Message
-          textarea#content.form-control(name='content', ng-model='createPostForm.content', required='required')
-        button.btn.btn-primary(type='submit') Post
+.container
+  .row
+    .col-sm-10.col-md-8.col-md-offset-2
+      .panel(ng-show='isUser')
+        .panel-body
+          form(ng-submit='addPost()', role='form', ng-init='createPostForm = {}')
+            .form-group
+              label(for='content') Message
+              textarea#content.form-control(name='content', ng-model='createPostForm.content', required='required')
+            button.btn.btn-primary(type='submit') Post
 
-  // existing items
-  .panel.panel-default(ng-repeat="post in posts | orderBy: '-createdAt'")
-    .panel-heading
-      | {{ post.title }}
-    .panel-body(style='overflow-y: scroll;')
-      | {{post.content}}
-    .panel-footer
-      .row
-        .col-md-6 {{ post.user.email }} - {{ post.createdAt|date:'MM/dd/yyyy @ h:mma' }}
-        .col-md-6.text-right.glyphicon.glyphicon-trash(ng-show='isAdmin || post.userId == user.id' ng-click='deletePost( post )')
+.container
+  .row
+    .col-sm-10.col-md-8.col-md-offset-2
+      .panel.panel-default(ng-repeat="post in posts | orderBy: '-createdAt'")
+        .panel-heading
+          small {{ post.user.email }} - {{ post.createdAt|date:'MM/dd/yyyy @ h:mma' }}
+          .pull-right.glyphicon.glyphicon-trash(ng-show='isAdmin || post.userId == user.id' ng-click='deletePost( post )')
+        .panel-body
+          div(style='white-space: pre;' ng-bind-html="post.content")
+
+
 
 

@@ -16,7 +16,6 @@ user = CreateAdminService.new.call
 puts 'Created admin user: ' << user.email
 
 Post.create([{
-                 title: 'First post',
                  content: 'Please sign in to make your first post.',
                  user_id: user.id
              }])
