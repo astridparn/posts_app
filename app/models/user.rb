@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.role.name = Role::NAMES[:admin]
+    self.role.name == Role::NAMES[:admin]
   end
 
   def set_role(name=Role::NAMES[:registered])

@@ -18,10 +18,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    logger.debug "Create action authorize #{current_user}"
     @post = Post.new(post_params)
     authorize @post
-    logger.debug "Create action authorized"
     @post.user_id = current_user.id
 
     if @post.save

@@ -11,5 +11,5 @@ angular.module('postsAppb')
             email: $scope.registrationForm.email
             password: $scope.registrationForm.password
         .catch (reason) ->
-          $scope.error = reason.data.errors.full_messages
+          $scope.error = reason.data.errors.full_messages.join ", "
   ]
