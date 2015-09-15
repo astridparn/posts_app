@@ -3,7 +3,7 @@
 ==Project Specifications
 
 Site users should be able to:
-* Register and sign in/sign out
+* Register, sign in and sign out
 * Create new posts if signed in
 * View all posts
 * Delete the post if creator or admin
@@ -12,9 +12,9 @@ Site users should be able to:
 
 * Install Node.js
 * Install Rails
-* Install PostgreSQL and start service.
+* Install PostgreSQL and start service
 * Set up Postgres role for creating application database later with Rails:
-    create role 'role_name' with createdb login password 'password';'
+    create role role_name with createdb login password 'password';
   Replace 'role_name' with the name of the operating system user that initialized the database.
 
 ==Local installation
@@ -23,7 +23,7 @@ Site users should be able to:
 * git clone https://github.com/astridparn/posts_app.git
 * cd posts_app
 * bundle install
-* rake db:migrate
+* rake db:setup
 * cd client
 * npm install
 * bower install
