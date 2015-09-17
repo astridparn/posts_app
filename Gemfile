@@ -20,6 +20,14 @@ gem 'responders', '~> 2.0'
 
 gem 'pundit'
 
+group :test, :development do
+  gem "factory_girl_rails", "~> 4.0"
+  gem "capybara"
+  gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem 'compass'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
